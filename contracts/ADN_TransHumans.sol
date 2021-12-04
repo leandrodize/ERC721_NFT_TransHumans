@@ -200,7 +200,14 @@ contract ADNTransHumans {
         "ShortHairTheCaesar",
         "ShortHairTheCaesarSidePart"
     ];
+    //Calculando el ADN de los NFTs
+    function deterministPseudoRandomADN(uint256 _tokenID, address _minter) public pure returns(uint256){
+        uint256 combinedParams = _tokenID + uint160(_minter);
+        bytes memory encodeParams = abi.encodePacked(combinedParams);
+        bytes32 hashedParams = keccak256(encodeParams);
 
+        return uint256(hashedParams);
+    }
     //Creando limite de atributos
     uint8 constant ADN_SECTION_SIZE = 2;
     //creando la funcion que inserta la formula para generar los ADN
@@ -217,5 +224,4 @@ contract ADNTransHumans {
         uint8 adnSection = _getADNSection(_adn, 2);
         return _clotheColor[adnSection % _clotheColor.length];
     }
-    //generando 
 }
