@@ -211,17 +211,79 @@ contract ADNTransHumans {
     //Creando limite de atributos
     uint8 constant ADN_SECTION_SIZE = 2;
     //creando la funcion que inserta la formula para generar los ADN
-    function _getADNSection (uint256 _adn, uint8 _rightDiscard) internal pure returns (uint8){
+    function getADNSection (uint256 _adn, uint8 _rightDiscard) internal pure returns (uint8){
         return uint8 ((_adn % (1 * 10 ** (_rightDiscard + ADN_SECTION_SIZE))) / (1*10**_rightDiscard));
     }
     //generando ADN de el array de accessoriesType
-    function _getAccesoriesType(uint8 _adn) public view returns(string memory){
-        uint8 adnSection = _getADNSection(_adn, 0);
+    function getAccesoriesType(uint256 _adn) public view returns(string memory){
+        uint256 adnSection = getADNSection(_adn, 0);
         return _accessoriesType[adnSection % _accessoriesType.length];
     }
     //generando ADN de el array de _clotheColor
-    function _getClotheColor(uint8 _adn)public view returns(string memory){
-        uint8 adnSection = _getADNSection(_adn, 2);
+    function getClotheColor(uint256 _adn)public view returns(string memory){
+        uint256 adnSection = getADNSection(_adn, 2);
         return _clotheColor[adnSection % _clotheColor.length];
+    }
+    function getClotheType(uint256 _adn) public view returns (string memory) {
+        uint256 dnaSection = getADNSection(_adn, 4);
+        return _clotheType[dnaSection % _clotheType.length];
+    }
+
+    function getEyeType(uint256 _adn) public view returns (string memory) {
+        uint256 dnaSection = getADNSection(_adn, 6);
+        return _eyeType[dnaSection % _eyeType.length];
+    }
+
+    function getEyeBrowType(uint256 _adn) public view returns (string memory) {
+        uint256 dnaSection = getADNSection(_adn, 8);
+        return _eyebrowType[dnaSection % _eyebrowType.length];
+    }
+
+    function getFacialHairColor(uint256 _adn)
+        public
+        view
+        returns (string memory)
+    {
+        uint256 dnaSection = getADNSection(_adn, 10);
+        return _facialHairColor[dnaSection % _facialHairColor.length];
+    }
+
+    function getFacialHairType(uint256 _adn)
+        public
+        view
+        returns (string memory)
+    {
+        uint256 dnaSection = getADNSection(_adn, 12);
+        return _facialHairType[dnaSection % _facialHairType.length];
+    }
+
+    function getHairColor(uint256 _adn) public view returns (string memory) {
+        uint256 dnaSection = getADNSection(_adn, 14);
+        return _hairColor[dnaSection % _hairColor.length];
+    }
+
+    function getHatColor(uint256 _adn) public view returns (string memory) {
+        uint256 dnaSection = getADNSection(_adn, 16);
+        return _hatColor[dnaSection % _hatColor.length];
+    }
+
+    function getGraphicType(uint256 _adn) public view returns (string memory) {
+        uint256 dnaSection = getADNSection(_adn, 18);
+        return _graphicType[dnaSection % _graphicType.length];
+    }
+
+    function getMouthType(uint256 _adn) public view returns (string memory) {
+        uint256 dnaSection = getADNSection(_adn, 20);
+        return _mouthType[dnaSection % _mouthType.length];
+    }
+
+    function getSkinColor(uint256 _adn) public view returns (string memory) {
+        uint256 dnaSection = getADNSection(_adn, 22);
+        return _skinColor[dnaSection % _skinColor.length];
+    }
+
+    function getTopType(uint256 _adn) public view returns (string memory) {
+        uint256 dnaSection = getADNSection(_adn, 24);
+        return _topType[dnaSection % _topType.length];
     }
 }
