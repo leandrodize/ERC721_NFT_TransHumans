@@ -17,7 +17,7 @@ contract TransHumans is ERC721URIStorage, ERC721Enumerable {
     constructor(uint256 _maxSupply) ERC721("TransHumans", "THS") {
         maxSupply = _maxSupply;
     }
-
+    //definiedo max supply de los NFTs con relacion a current.
     function mint() public {
         uint256 current = _idCounter.current();
         require(current < maxSupply, "No TransHumans Left");
@@ -25,13 +25,15 @@ contract TransHumans is ERC721URIStorage, ERC721Enumerable {
         _safeMint(msg.sender, current);
 
     }
+    //construyendo tokenURI para conectar la METADATA del NFT con el archivo json
     function tokenURI(uint256 tokenId) public view override returns (string memory)
     {
         require(
+            //_exists import ERC721 OpenZeppelin
             _exists(tokenId),
             "ERC721 Metadata: URI query for nonexistent token"
         );
-
+        //metodo abi sirve para concatenar strings
         string memory jsonURI = Base64.encode(
             abi.encodePacked(
                 '{ "name": "TransHumans #',
@@ -41,7 +43,7 @@ contract TransHumans is ERC721URIStorage, ERC721Enumerable {
                 '"}'
             )
         );
-
+        //concatenacion de los datos JSON con el formato base64 HTTPS
         return string(abi.encodePacked("data:application/json;base64,", jsonURI));
     }
 
