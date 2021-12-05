@@ -1,12 +1,10 @@
-const {ethers} = require("ethers");
-
 const deploy = async() => {
     const [deployer] = await ethers.getSigners();
 
     console.log("Deploying contract with the account: ", deployer.address);
 
     const TransHumans = await ethers.getContractFactory("TransHumans");
-    const deployed =  await TransHumans.deploy();
+    const deployed =  await TransHumans.deploy(10000);
 
     console.log("TransHumans NFT is deployed at:", deployed.address);
 };
